@@ -61,19 +61,19 @@ async function handler(req, res) {
     response.status = 500
   }
 
-  console.log("emailsFilePath = ", emailsFilePath)
-  let dataFile = fs.readFileSync(emailsFilePath, 'utf-8');
-  if (!dataFile.includes(req.body.emailJira)) {
-    // เพิ่ม email ลงในข้อมูลที่อ่านได้
-    var flag = "fail"
-    if (response.data) {
-      flag = "pass"
-    }
-    const formattedDateTime = new Date().toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    dataFile += `${req.body.emailJira} : ` + flag + ` : ` + formattedDateTime + `\n`;
-    // เขียนข้อมูลทั้งหมดกลับลงในไฟล์ .txt
-    fs.writeFileSync(emailsFilePath, dataFile);
-  }
+  // console.log("emailsFilePath = ", emailsFilePath)
+  // let dataFile = fs.readFileSync(emailsFilePath, 'utf-8');
+  // if (!dataFile.includes(req.body.emailJira)) {
+  //   // เพิ่ม email ลงในข้อมูลที่อ่านได้
+  //   var flag = "fail"
+  //   if (response.data) {
+  //     flag = "pass"
+  //   }
+  //   const formattedDateTime = new Date().toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  //   dataFile += `${req.body.emailJira} : ` + flag + ` : ` + formattedDateTime + `\n`;
+  //   // เขียนข้อมูลทั้งหมดกลับลงในไฟล์ .txt
+  //   fs.writeFileSync(emailsFilePath, dataFile);
+  // }
   
   res.status(response.status).json(response);
 }
