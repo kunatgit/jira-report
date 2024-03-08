@@ -3,7 +3,7 @@ import path from 'path';
 
 export default async function handler(req, res) {
   try {
-    const filePath = path.join(process.cwd(), '', 'emaillist.txt');
+    const filePath = path.join(process.cwd(), 'public', 'data', 'emaillist.txt');
 
     const data = await fs.readFile(filePath, 'utf-8');
     
