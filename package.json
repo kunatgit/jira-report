@@ -1,0 +1,29 @@
+{
+  "name": "jira-report",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start -p 9999",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@chakra-ui/icons": "^2.1.1",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "axios": "^1.6.7",
+    "exceljs": "^4.4.0",
+    "framer-motion": "^11.0.5",
+    "next": "13.5.6",
+    "pm2": "^5.3.1",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-type-animation": "^3.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^8",
+    "eslint-config-next": "13.5.6"
+  }
+}

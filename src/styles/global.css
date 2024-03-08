@@ -1,0 +1,10 @@
+/* styles/globals.css */
+@font-face {
+  font-family: "Kanit";
+  src: url("/fonts/Kanit-Regular.ttf") format("truetype");
+  /* เพิ่มรูปแบบ font อื่น ๆ ตามต้องการ */
+}
+
+* {
+  font-family: "Kanit", sans-serif;
+}
