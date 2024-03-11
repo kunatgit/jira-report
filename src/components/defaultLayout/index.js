@@ -32,7 +32,7 @@ function DefaultLayout({ body }) {
         >
           <Center>
             <Text fontSize={'sm'} color={'white'}>
-              สอบถามการใช้งานเพิ่มเติม : kunat.kam@thailife.com
+              สอบถามการใช้งานเพิ่มเติม : IT-Partner@thailife.com
             </Text>
           </Center>
         </Box>
