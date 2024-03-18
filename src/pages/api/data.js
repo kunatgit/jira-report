@@ -43,12 +43,9 @@ async function handler(req, res) {
             var worklogs = response.data.worklogs
             for (var j in worklogs) {
               var dateObj = new Date(worklogs[j]['started'])
-              // var timeStart = dateObj.toLocaleTimeString('th-TH', { hour12: false })
-              var hours = ("0" + dateObj.getHours()).slice(-2);
-              var minutes = ("0" + dateObj.getMinutes()).slice(-2);
-              var seconds = ("0" + dateObj.getSeconds()).slice(-2);
-
-              var timeStart = hours + ":" + minutes + ":" + seconds;
+              console.log("worklogs started ==> ",worklogs[j]['started'])
+              console.log("date object ==> ",dateObj);
+              var timeStart = dateObj.toLocaleTimeString('th-TH', { hour12: false })
               var date = dateObj.getFullYear() + '-' + (dateObj.getMonth() + 1).toString().padStart(2, '0') + '-' + dateObj.getDate().toString().padStart(2, '0');
               var obj = {
                 "title": worklogs[j]['comment'] ? worklogs[j]['comment'] : "",
