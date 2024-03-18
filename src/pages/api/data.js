@@ -45,8 +45,18 @@ async function handler(req, res) {
               var dateObj = new Date(worklogs[j]['started'])
               console.log("worklogs started ==> ",worklogs[j]['started'])
               console.log("date object ==> ",dateObj);
-              var timeStart = dateObj.toLocaleTimeString('th-TH', { hour12: false })
-              var date = dateObj.getFullYear() + '-' + (dateObj.getMonth() + 1).toString().padStart(2, '0') + '-' + dateObj.getDate().toString().padStart(2, '0');
+
+              var options = {timeZone: 'Asia/Bangkok',hour12: false, year: 'numeric', month: '2-digit', day: '2-digit' };
+              var formattedDate = dateObj.toLocaleDateString('th-TH', options);
+
+              // แปลงเวลา
+              var timeOptions = {timeZone: 'Asia/Bangkok',hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
+              var formattedTime = dateObj.toLocaleTimeString('th-TH', timeOptions);
+
+              
+              var timeStart = formattedTime;
+              var date = formattedDate;
+
               var obj = {
                 "title": worklogs[j]['comment'] ? worklogs[j]['comment'] : "",
                 "timeSpentSeconds": worklogs[j]['timeSpentSeconds'],
@@ -57,6 +67,7 @@ async function handler(req, res) {
                 "timeStart": timeStart,
                 "started": worklogs[j]['started'],
               }
+              console.log("obj ==> ",obj)
 
               var start = new Date(startDate)
               var end = new Date(endDate)
