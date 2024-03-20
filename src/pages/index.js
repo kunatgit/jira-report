@@ -420,11 +420,11 @@ function MyApp() {
           <ModalHeader>
             <Stack direction={{ base: 'column', md: 'row' }} justifyContent={'space-between'}>
               <Text textAlign={'center'}>ข้อมูล : {emailJira} </Text>
-              <HStack justifyContent={'flex-start'} >
+              {/* <HStack justifyContent={'flex-start'} >
                 <Button rightIcon={<DownloadIcon />} size={'sm'} w='100%' onClick={downLoadReport}>
                   Report
                 </Button>
-              </HStack>
+              </HStack> */}
             </Stack>
           </ModalHeader>
           {/* <ModalCloseButton /> */}

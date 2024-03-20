@@ -100,83 +100,83 @@ async function handler(req, res) {
 
 
         // เขียนไฟล์
-        const workbook = new ExcelJS.Workbook();
-        const worksheet = workbook.addWorksheet('Report');
-        worksheet.addRow([
-          'ลำดับ',
-          'วันที่',
-          'เวลาที่เริ่มทำ',
-          'Sub Task',
-          'เวลาที่ใช้',
-          'เวลาที่ใช้ (วินาที)',
-          'รายละเอียด',
-          'ลิงค์'
-        ]).font = { bold: true };
+        // const workbook = new ExcelJS.Workbook();
+        // const worksheet = workbook.addWorksheet('Report');
+        // worksheet.addRow([
+        //   'ลำดับ',
+        //   'วันที่',
+        //   'เวลาที่เริ่มทำ',
+        //   'Sub Task',
+        //   'เวลาที่ใช้',
+        //   'เวลาที่ใช้ (วินาที)',
+        //   'รายละเอียด',
+        //   'ลิงค์'
+        // ]).font = { bold: true };
 
-        for (let rowIndex = 0; rowIndex < worklogList.length; rowIndex++) {
-          const element = worklogList[rowIndex];
-          const linkWork = `${host}/browse/${element.subTaskID}?focusedWorklogId=${element.workLogID}`;
+        // for (let rowIndex = 0; rowIndex < worklogList.length; rowIndex++) {
+        //   const element = worklogList[rowIndex];
+        //   const linkWork = `${host}/browse/${element.subTaskID}?focusedWorklogId=${element.workLogID}`;
 
-          const row = worksheet.addRow([
-            rowIndex + 1,
-            element.date,
-            element.timeStart,
-            element.subTaskID,
-            element.useTime,
-            element.timeSpentSeconds,
-            element.title,
-            { text: linkWork, hyperlink: linkWork },
-          ]);
-        }
+        //   const row = worksheet.addRow([
+        //     rowIndex + 1,
+        //     element.date,
+        //     element.timeStart,
+        //     element.subTaskID,
+        //     element.useTime,
+        //     element.timeSpentSeconds,
+        //     element.title,
+        //     { text: linkWork, hyperlink: linkWork },
+        //   ]);
+        // }
 
-        worksheet.eachRow((row, rowIndex) => {
-          row.eachCell((cell, colIndex) => {
-            if (rowIndex > 1 && (colIndex == 7 || colIndex == 8)) {
-              cell.alignment = { wrapText: true, horizontal: 'left', vertical: 'middle' };
-            } else {
-              cell.alignment = { wrapText: true, horizontal: 'center', vertical: 'middle' };
-            }
+        // worksheet.eachRow((row, rowIndex) => {
+        //   row.eachCell((cell, colIndex) => {
+        //     if (rowIndex > 1 && (colIndex == 7 || colIndex == 8)) {
+        //       cell.alignment = { wrapText: true, horizontal: 'left', vertical: 'middle' };
+        //     } else {
+        //       cell.alignment = { wrapText: true, horizontal: 'center', vertical: 'middle' };
+        //     }
 
-            if (colIndex == 7) {
-              console.log("1.8 * 80 = ", 1.8 * 80)
-              console.log("cell.value = ", cell.value)
-              console.log("cell.length = ", cell.value.length)
-              var cellHeight = (cell.value.toString().split('\n').length || 1)
-              console.log("cellHeight1 = ", cellHeight)
-              if (cellHeight == 1) {
-                cellHeight = cell.value.length
-                if (cell.value.length < 30) {
-                  cellHeight = 30
-                }
-              } else {
-                cellHeight = cellHeight * 30
-                cellHeight = cellHeight + 10
-              }
-              console.log("cellHeight2 = ", cellHeight)
-              row.height = cellHeight
-            }
-          });
+        //     if (colIndex == 7) {
+        //       console.log("1.8 * 80 = ", 1.8 * 80)
+        //       console.log("cell.value = ", cell.value)
+        //       console.log("cell.length = ", cell.value.length)
+        //       var cellHeight = (cell.value.toString().split('\n').length || 1)
+        //       console.log("cellHeight1 = ", cellHeight)
+        //       if (cellHeight == 1) {
+        //         cellHeight = cell.value.length
+        //         if (cell.value.length < 30) {
+        //           cellHeight = 30
+        //         }
+        //       } else {
+        //         cellHeight = cellHeight * 30
+        //         cellHeight = cellHeight + 10
+        //       }
+        //       console.log("cellHeight2 = ", cellHeight)
+        //       row.height = cellHeight
+        //     }
+        //   });
 
-          // if(rowIndex != 1){
-          //   row.height = 1.8 * 80
-          // }
-        });
-        const columnWidths = [0.83, 1.26,1.26, 1.25, 1.66, 1.46, 3.18, 3.18];
-        columnWidths.forEach((width, index) => {
-          worksheet.getColumn(index + 1).width = width * 10; // คูณด้วย 10 เพื่อปรับให้เป็นหน่วย character width
-        });
+        //   // if(rowIndex != 1){
+        //   //   row.height = 1.8 * 80
+        //   // }
+        // });
+        // const columnWidths = [0.83, 1.26,1.26, 1.25, 1.66, 1.46, 3.18, 3.18];
+        // columnWidths.forEach((width, index) => {
+        //   worksheet.getColumn(index + 1).width = width * 10; // คูณด้วย 10 เพื่อปรับให้เป็นหน่วย character width
+        // });
 
-        worksheet.views = [
-          { state: 'frozen', xSplit: 0, ySplit: 1, topLeftCell: 'A2' },
-        ];
+        // worksheet.views = [
+        //   { state: 'frozen', xSplit: 0, ySplit: 1, topLeftCell: 'A2' },
+        // ];
         
-        const buffer = await workbook.xlsx.writeBuffer();
-        const base64File = buffer.toString('base64')
+        // const buffer = await workbook.xlsx.writeBuffer();
+        // const base64File = buffer.toString('base64')
         
         response.message = "Verify API pass";
         response.status = 200
         response.data = results
-        response.file = base64File
+        response.file = ""
         response.sumAll = sumAll
       } else {
         response.message = "Bad request";
