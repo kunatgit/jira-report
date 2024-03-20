@@ -25,7 +25,7 @@ async function handler(req, res) {
         await axios.get(url, { headers }).then(response => {
           console.log("[api/serach] call search data", response.data)
           var issues = response.data.issues
-          console.log(issues)
+          // console.log(issues)
           for (var i in issues) {
             subtaskList.push(issues[i].key)
           }
@@ -43,8 +43,8 @@ async function handler(req, res) {
             var worklogs = response.data.worklogs
             for (var j in worklogs) {
               var dateObj = new Date(worklogs[j]['started'])
-              console.log("worklogs started ==> ",worklogs[j]['started'])
-              console.log("date object ==> ",dateObj);
+              // console.log("worklogs started ==> ",worklogs[j]['started'])
+              // console.log("date object ==> ",dateObj);
 
               var timeOptions = {timeZone: 'Asia/Bangkok',hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
               var timeStart = dateObj.toLocaleTimeString('th-TH', timeOptions);
@@ -77,7 +77,7 @@ async function handler(req, res) {
           });
         }
         worklogList.sort((a, b) => new Date(a.started) - new Date(b.started));
-        
+
         const dailySumMap = {};
         worklogList.forEach(item => {
           if (!dailySumMap[item.date]) {
@@ -138,11 +138,11 @@ async function handler(req, res) {
             }
 
             if (colIndex == 7) {
-              console.log("1.8 * 80 = ", 1.8 * 80)
-              console.log("cell.value = ", cell.value)
-              console.log("cell.length = ", cell.value.length)
+              // console.log("1.8 * 80 = ", 1.8 * 80)
+              // console.log("cell.value = ", cell.value)
+              // console.log("cell.length = ", cell.value.length)
               var cellHeight = (cell.value.toString().split('\n').length || 1)
-              console.log("cellHeight1 = ", cellHeight)
+              // console.log("cellHeight1 = ", cellHeight)
               if (cellHeight == 1) {
                 cellHeight = cell.value.length
                 if (cell.value.length < 30) {
@@ -152,7 +152,7 @@ async function handler(req, res) {
                 cellHeight = cellHeight * 30
                 cellHeight = cellHeight + 10
               }
-              console.log("cellHeight2 = ", cellHeight)
+              // console.log("cellHeight2 = ", cellHeight)
               row.height = cellHeight
             }
           });
@@ -178,6 +178,7 @@ async function handler(req, res) {
         response.data = results
         response.file = base64File
         response.sumAll = sumAll
+        
       } else {
         response.message = "Bad request";
         response.status = 400
@@ -192,6 +193,8 @@ async function handler(req, res) {
     response.message = "Internal Server Error";
     response.status = 500
   }
+
+  console.log('response ==> ',response)
   res.status(response.status).json(response);
 }
 export default handler;
