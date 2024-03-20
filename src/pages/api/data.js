@@ -37,6 +37,8 @@ async function handler(req, res) {
           res.status(response.status).json(response);
         });
 
+        console.log('subtaskList.length => ',subtaskList.length)
+
         for (var i in subtaskList) {
           const url = host + "/rest/api/2/issue/" + subtaskList[i] + "/worklog";
           await axios.get(url, { headers }).then(response => {
@@ -60,7 +62,7 @@ async function handler(req, res) {
                 "timeStart": timeStart,
                 "started": worklogs[j]['started'],
               }
-              console.log("obj ==> ",obj)
+              // console.log("obj ==> ",obj)
               var start = new Date(startDate)
               var end = new Date(endDate)
               var da = new Date(date)
@@ -77,7 +79,8 @@ async function handler(req, res) {
           });
         }
         worklogList.sort((a, b) => new Date(a.started) - new Date(b.started));
-
+        console.log('worklogList.length => ',worklogList.length)
+        
         const dailySumMap = {};
         worklogList.forEach(item => {
           if (!dailySumMap[item.date]) {
